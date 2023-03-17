@@ -23,19 +23,22 @@ class Display:
         self._epaper_driver.init()
 
     def clear_display(self):
-        self._epaper_driver.clear(0xFF)
+        self._epaper_driver.Clear(0xFF)
 
-    def partial_draw(self, image: Image):
-        self._epaper_driver.displayPartial(image=image)
+    def sleep(self):
+        self._epaper_driver.sleep()
 
-    def draw(self, image: Image):
-        self._epaper_driver.displayPartBaseImage(image=image)
+    def partial_draw(self, image):
+        self._epaper_driver.displayPartial(self.to_bytes(image=image))
 
-    def display(self, image: Image):
+    def draw(self, image):
+        self._epaper_driver.displayPartBaseImage(self.to_bytes(image=image))
+
+    def display(self, image):
         self._epaper_driver.display(image=image)
 
     def to_bytes(self, image: Image):
-        self._epaper_driver.getbuffer(image=image)
+        return self._epaper_driver.getbuffer(image=image)
 
     @property
     def epaper_driver(self):

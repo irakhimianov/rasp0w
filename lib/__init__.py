@@ -36,3 +36,5 @@ def get_display_driver(display_type):
             return epd1in54b.EPD()
         case 'v213' | 'v213d' | 'epd2in13d':
             return epd2in13d.EPD()
+        case _:
+            raise SyntaxError('display type not found')
